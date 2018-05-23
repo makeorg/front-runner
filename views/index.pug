@@ -1,0 +1,20 @@
+extends layout
+
+append content
+  h1= title
+  script
+      fbq('trackCustom', 'display-loader', {})
+  .spinner__sub-wrapper
+    .spinner__wrapper
+      span.spinner
+        svg(x="0" y="0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 66 66" height="40" width="40" class="spinner__shape")
+          linearGradient(id="gradient")
+            stop(offset="0" style="stop-color:rgb(0,0,0);stop-opacity:0;")
+            stop(offset="1" style="stop-color:rgb(0,0,0);stop-opacity:1;")
+          path(
+            fill="url(#gradient)"
+            d="M0,33C0,14.8,14.8,0,33,0s33,14.8,33,33S51.2,66,33,66S0,51.2,0,33z M6,33c0,14.9,12.1,27,27,27s27-12.1,27-27 S47.9,6,33,6S6,18.1,6,33z"
+          )
+  script(type="text/javascript" src="http://localhost:9019/make-front-fastopt-library.js")
+  script(src='/javascripts/helper.js')
+  script(type="text/javascript" src="http://localhost:9019/make-front-fastopt.js")
