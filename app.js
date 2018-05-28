@@ -19,8 +19,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/fonts', proxy({target: 'https://www.preprod.makeorg.tech', changeOrigin: true}));
-app.use('/images', proxy({target: 'https://www.preprod.makeorg.tech', changeOrigin: true}));
+app.use('/fonts', proxy({target: process.env.FRONT_URL, changeOrigin: true}));
+app.use('/images', proxy({target: process.env.FRONT_URL, changeOrigin: true}));
 app.use('/:country', indexRouter);
 
 // catch 404 and forward to error handler

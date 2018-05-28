@@ -24,15 +24,13 @@ if (referer == "r.orange.fr" && (anchor == "" || anchor == "/" || anchor.toLower
 }
 
 var configuration = {
-   "apiUrl": "https://api.preprod.makeorg.tech",
+   "apiUrl": window.apiUrl,
    "googleAppId": "810331964280-qtdupbrjusihad3b5da51i5p66qpmhmr.apps.googleusercontent.com",
    "googleAdWordsId": "AW-819115721",
    "facebookAppId": "317128238675603",
    "detectedCountry": "FR",
    "forcedCountry": ""
 }
-var exports = window;
-exports.require = window["makeApp"].require;
 
 // polyfill for Object.assign
 if (typeof Object.assign != 'function') {

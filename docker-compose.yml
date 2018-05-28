@@ -1,0 +1,13 @@
+version: "3.3"
+
+services:
+  make-front-proxy:
+    build: .
+    command: nodemon bin/www
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - "9009:8080"
+    env_file:
+      - .env
