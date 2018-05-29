@@ -1,7 +1,7 @@
 version: "3.3"
 
 services:
-  make-front-proxy:
+  front-runner:
     build: .
     command: nodemon bin/www
     volumes:

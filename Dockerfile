@@ -9,4 +9,6 @@ RUN npm install
 
 COPY . .
 
+ENV API_URL https://api.prod.makeorg.tech
+
 EXPOSE 8080
