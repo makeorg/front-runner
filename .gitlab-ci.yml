@@ -1,0 +1,30 @@
+image: makeorg/docker-sbt-coursier-nvm
+
+cache:
+  paths:
+  - node_modules/
+
+stages:
+  - build
+build:
+  stage: build
+  tags:
+    - docker
+  before_script:
+    - export IMAGE_VERSION=`git rev-parse --short=10 HEAD`
+    - export IMAGE=front-runner
+    - mkdir -p /var/lib/docker
+    - mount -t tmpfs -o size=12G tmpfs /var/lib/docker
+    - if [ ! -e /var/run/docker.sock ]; then DOCKER_DRIVER=overlay2 dockerd & fi
+    - until docker ps; do echo "waiting for docker to be up..."; sleep 0.5; done
+    - docker login "https://$NEXUS_URL" --username "$NEXUS_USER" --password "$NEXUS_PASSWORD"
+    - . /root/.profile
+    - echo $(docker pull $NEXUS_URL/$IMAGE:$IMAGE_VERSION)
+  script:
+    - >
+      if [[ -z $(docker images -q $NEXUS_URL/$IMAGE:$IMAGE_VERSION) ]];then
+        docker build --rm -t $NEXUS_URL/$IMAGE:$IMAGE_VERSION .
+        docker push $NEXUS_URL/$IMAGE:$IMAGE_VERSION
+      fi
+    - docker tag $NEXUS_URL/$IMAGE:$IMAGE_VERSION $NEXUS_URL/$IMAGE:$CI_COMMIT_REF_NAME-latest
+    - docker push $NEXUS_URL/$IMAGE:$CI_COMMIT_REF_NAME-latest
