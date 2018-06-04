@@ -7,23 +7,24 @@ var path = require("path");
 var apiUrl = process.env.API_URL;
 var frontUrl = process.env.FRONT_URL;
 
+
 router.get('/:country', function(req, res, next) {
-  var metas = {
+  const country = req.param('country');
+  const metas = {
     title: "Make.org, accélérateur d'intérêt collectif",
     description: "Proposez, votez, agissons : ensemble, trouvons des solutions aux grandes problématiques actuelles. Les plus soutenues seront mises en action par Make.org et ses partenaires.",
     picture: "https://uploads-ssl.webflow.com/598345cdee443e00013ae603/59a526e0a1a95c0001f8ca11_make.png"
   };
 
-  res.send(loadContent(req.param('country'), metas));
+  res.send(loadContent(country, metas));
 });
 
 // Proposal from theme
 router.get('/:country/theme/:themeSlug/proposal/:proposalSlug', function(req, res, next) {
-
   request(`${process.env.API_URL}/proposals?slug=${req.param('proposalSlug')}`, function(error, response, body) {
-    var parsedBody = JSON.parse(body);
+    const parsedBody = JSON.parse(body);
     if (parsedBody.total > 0) {
-      var metas = {
+      const metas = {
         title: "Make.org, accélérateur d'intérêt collectif",
         description: parsedBody.results[0].content,
         picture: "https://uploads-ssl.webflow.com/598345cdee443e00013ae603/59a526e0a1a95c0001f8ca11_make.png"
@@ -37,9 +38,9 @@ router.get('/:country/theme/:themeSlug/proposal/:proposalSlug', function(req, re
 // Proposal from operation
 router.get('/:country/consultation/:operationSlug/proposal/:proposalSlug', function(req, res, next) {
   request(`${process.env.API_URL}/proposals?slug=${req.param('proposalSlug')}`, function(error, response, body) {
-    var parsedBody = JSON.parse(body);
+    const parsedBody = JSON.parse(body);
     if (parsedBody.total > 0) {
-      var metas = {
+      const metas = {
         title: "Make.org, accélérateur d'intérêt collectif",
         description: parsedBody.results[0].content,
         picture: "https://uploads-ssl.webflow.com/598345cdee443e00013ae603/59a526e0a1a95c0001f8ca11_make.png"
@@ -53,9 +54,9 @@ router.get('/:country/consultation/:operationSlug/proposal/:proposalSlug', funct
 // Proposal from no where
 router.get('/:country/proposal/:proposalSlug', function(req, res, next) {
   request(`${process.env.API_URL}/proposals?slug=${req.param('proposalSlug')}`, function(error, response, body) {
-    var parsedBody = JSON.parse(body);
+    const parsedBody = JSON.parse(body);
     if (parsedBody.total > 0) {
-      var metas = {
+      const metas = {
         title: "Make.org, accélérateur d'intérêt collectif",
         description: parsedBody.results[0].content,
         picture: "https://uploads-ssl.webflow.com/598345cdee443e00013ae603/59a526e0a1a95c0001f8ca11_make.png"
@@ -67,9 +68,10 @@ router.get('/:country/proposal/:proposalSlug', function(req, res, next) {
 });
 
 function loadContent(country, metas) {
-  var data = fs.readFileSync(path.join(__dirname + '/../front/index.html'), 'utf8');
+  // @todo: add cache system
+  const data = fs.readFileSync(path.join(__dirname + '/../front/index.html'), 'utf8');
 
-  var content = data
+  const content = data
     .replace(/API_URL/g, process.env.API_URL)
     .replace(/FORCED_COUNTRY/g, country)
     .replace(/DETECTED_COUNTRY/g, country)
