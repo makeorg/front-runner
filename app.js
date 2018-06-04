@@ -23,7 +23,9 @@ app.use('/$', function(req, res) {
 app.use(express.static(path.join(__dirname, 'front')));
 
 app.use(rewrite('/*.js', '/front/$1'));
+app.use(rewrite('/*/*.js', '/front/$2'));
 app.use(rewrite('/*.css', '/front/$1'));
+app.use(rewrite('/*/*.css', '/front/$2'));
 
 app.use('/', indexRouter);
 

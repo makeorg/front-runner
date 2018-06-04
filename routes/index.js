@@ -81,4 +81,5 @@ function loadContent(country, metas) {
 
   return content;
 }
+
 module.exports = router;
