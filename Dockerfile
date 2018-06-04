@@ -11,4 +11,4 @@ COPY . .
 
 ENV API_URL https://api.prod.makeorg.tech
 
-EXPOSE 8080
+EXPOSE 80

@@ -8,6 +8,6 @@ services:
       - .:/usr/src/app
       - /usr/src/app/node_modules
     ports:
-      - "9009:8080"
+      - "9009:80"
     env_file:
       - .env
