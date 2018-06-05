@@ -3,7 +3,6 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var rewrite = require('express-urlrewrite');
 var indexRouter = require('./routes/index');
 
 var app = express();
@@ -21,12 +20,6 @@ app.use('/$', function(req, res) {
 });
 
 app.use(express.static(path.join(__dirname, 'front')));
-
-app.use(rewrite('/*.js', '/front/$1'));
-app.use(rewrite('/*/*.js', '/front/$2'));
-app.use(rewrite('/*.css', '/front/$1'));
-app.use(rewrite('/*/*.css', '/front/$2'));
-
 app.use('/', indexRouter);
 
 // catch 404 and forward to error handler
