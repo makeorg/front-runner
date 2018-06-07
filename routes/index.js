@@ -3,14 +3,13 @@ var router = express.Router();
 var request = require('request-promise');
 var fs = require('fs');
 var path = require("path");
+var conf = require("../helpers/configuration.js")
+var metasHelper = require("../helpers/metas.js")
+var proposalsController = require("../controllers/proposals.js")
 
-const apiUrl = process.env.API_URL || 'https://api.preprod.makeorg.tech';
+const apiUrl = conf.apiUrl;
 
-const defaultMetas = {
-  title: "Make.org, accélérateur d'intérêt collectif",
-  description: "Proposez, votez, agissons : ensemble, trouvons des solutions aux grandes problématiques actuelles. Les plus soutenues seront mises en action par Make.org et ses partenaires.",
-  picture: "https://uploads-ssl.webflow.com/598345cdee443e00013ae603/59a526e0a1a95c0001f8ca11_make.png"
-};
+const defaultMetas = metasHelper.default;
 
 
 router.get('/:country', function(req, res, next) {
@@ -23,15 +22,12 @@ router.get('/:country', function(req, res, next) {
 router.get('/:country/theme/:themeSlug/proposal/:proposalSlug', function(req, res, next) {
   const country = req.param('country');
 
-  request(`${apiUrl}/proposals?slug=${req.param('proposalSlug')}`)
-    .then(function(response){
-      return JSON.parse(response);
-    })
-    .then(function(parsedResopnse) {
-      let metas = parsedResopnse.total > 0
+  proposalsController.proposalBySlug(req.param('proposalSlug'))
+    .then(function(parsedResponse) {
+      let metas = parsedResponse.total > 0
           ? {
             ...defaultMetas,
-            description: parsedResopnse.results[0].content,
+            description: parsedResponse.results[0].content,
           } : defaultMetas;
 
       res.send(loadContent(country, metas));
@@ -46,15 +42,12 @@ router.get('/:country/theme/:themeSlug/proposal/:proposalSlug', function(req, re
 router.get('/:country/consultation/:operationSlug/proposal/:proposalSlug', function(req, res, next) {
   const country = req.param('country');
 
-  request(`${apiUrl}/proposals?slug=${req.param('proposalSlug')}`)
-    .then(function(response){
-      return JSON.parse(response);
-    })
-    .then(function(parsedResopnse) {
-      let metas = parsedResopnse.total > 0
+  proposalsController.proposalBySlug(req.param('proposalSlug'))
+    .then(function(parsedResponse) {
+      let metas = parsedResponse.total > 0
           ? {
             ...defaultMetas,
-            description: parsedResopnse.results[0].content,
+            description: parsedResponse.results[0].content,
           } : defaultMetas;
 
       res.send(loadContent(country, metas));
@@ -67,23 +60,17 @@ router.get('/:country/consultation/:operationSlug/proposal/:proposalSlug', funct
 
 // Proposal from no where
 router.get('/:country/proposal/:proposalSlug', function(req, res, next) {
-  const country = req.param('country');
+  const country = req.params.country;
 
-  request(`${apiUrl}/proposals?slug=${req.param('proposalSlug')}`)
-    .then(function(response){
-      return JSON.parse(response);
+  proposalsController.proposalBySlug(req.param('proposalSlug'))
+    .then(function(parsedProposalResponse) {
+      return proposalsController.proposalMetas(parsedProposalResponse, req.query);
     })
-    .then(function(parsedResopnse) {
-      let metas = parsedResopnse.total > 0
-          ? {
-            ...defaultMetas,
-            description: parsedResopnse.results[0].content,
-          } : defaultMetas;
-
-      res.send(loadContent(country, metas));
-
-    })
+      .then(function(localMetas) {
+        res.send(loadContent(country, localMetas));
+      })
     .catch(function (err) {
+      console.log("falling back to default metas : " + err);
       res.send(loadContent(country, defaultMetas));
     });
 });
