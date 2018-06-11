@@ -1,0 +1,16 @@
+{
+  "extends": "airbnb-base",
+  "rules": {
+    "func-names": ["error", "never"],
+    "prefer-destructuring": ["error", {
+      "array": false,
+      "object": false
+    }, {
+      "enforceForRenamedProperties": false
+    }],
+    "no-console": ["warn", { "allow": ["warn", "error"] }],
+    "space-before-function-paren": ["error", "never"],
+    "no-throw-literal": "off",
+    "no-shadow": ["warn"]
+  }
+}
