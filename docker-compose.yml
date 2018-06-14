@@ -3,7 +3,7 @@ version: "3.3"
 services:
   front-runner:
     build: .
-    command: PORT=80 nodemon bin/www
+    command: PORT=80 pm2 start bin/www
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules
