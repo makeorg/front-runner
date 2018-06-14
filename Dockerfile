@@ -13,3 +13,5 @@ ENV API_URL https://api.prod.makeorg.tech
 EXPOSE 80
 
 CMD [ "pm2-runtime", "start", "ecosystem.config.js" ]
+
+HEALTHCHECK --interval=20s CMD curl --fail http://localhost:80 || exit 1
