@@ -3,20 +3,25 @@
 This application is a proxy of make-front app to be able to add dynamic data rendered from server like meta-tags.
 
 ## Installation:
-The application is builded into a Docker image. The stack contain:
+The application is built into a Docker image. The stack contains:
 
-* node
-* npm
+* node (v9.5.0+)
+* npm (5.6.0+)
 
 In dev environnement you should have a symlink of the dist folder from the make-front app:
 
 ```
-ln -s ~/www/make-front/target/scala-2.12/scalajs-bundler/main/dist ~/www/make-front-proxy/front
+ln -s /path/to/make-front/target/scala-2.12/scalajs-bundler/main/dist /path/to/make-front-proxy/front
 ```
 
 To launch the application:
-```
+```sh
+npm install
+
 npm start
+# OR
+npm run dev # app auto restart
+
 ```
 
 ## Build
