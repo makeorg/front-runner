@@ -31,6 +31,8 @@ function getOperationImage(operationSlug) {
       return 'https://uploads-ssl.webflow.com/59833d390a24e50001b873d8/5ac49addb50fc94d36e63221_share%20image%20une%20chance%20pour%20chaque%20jeune.jpg';
     case 'mieux-vivre-ensemble':
       return 'https://uploads-ssl.webflow.com/598345cdee443e00013ae603/5aaa3e43106bcfc5bc0979cc_simulation%20visuel%20fb.jpg';
+    case 'culture':
+      return 'https://uploads-ssl.webflow.com/5ad76c5556a6411ac66ff8b3/5b23dad56f08f70e31e8a787_une.png';
     default:
       return defaultMetas.picture;
   }
