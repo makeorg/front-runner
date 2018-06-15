@@ -10,7 +10,7 @@ The application is built into a Docker image. The stack contains:
 
 In dev environnement you should have a symlink of the dist folder from the make-front app:
 
-```
+```sh
 ln -s /path/to/make-front/target/scala-2.12/scalajs-bundler/main/dist /path/to/make-front-proxy/front
 ```
 
