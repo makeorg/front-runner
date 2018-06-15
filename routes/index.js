@@ -13,18 +13,18 @@ const defaultMetas = metasHelper.default;
 
 
 router.get('/:country', function(req, res, next) {
-  const country = req.param('country');
+  const country = req.params.country;
 
   res.send(loadContent(country, defaultMetas));
 });
 
 // Proposal from theme
 router.get('/:country/theme/:themeSlug/proposal/:proposalSlug', function(req, res, next) {
-  const country = req.param('country');
+  const country = req.params.country;
 
-  proposalsController.proposalBySlug(req.param('proposalSlug'))
+  proposalsController.proposalBySlug(req.params.proposalSlug)
     .then(function(parsedResponse) {
-      let metas = parsedResponse.total > 0
+      const metas = parsedResponse.total > 0
           ? {
             ...defaultMetas,
             description: parsedResponse.results[0].content,
@@ -40,11 +40,11 @@ router.get('/:country/theme/:themeSlug/proposal/:proposalSlug', function(req, re
 
 // Proposal from operation
 router.get('/:country/consultation/:operationSlug/proposal/:proposalSlug', function(req, res, next) {
-  const country = req.param('country');
+  const country = req.params.country;
 
-  proposalsController.proposalBySlug(req.param('proposalSlug'))
+  proposalsController.proposalBySlug(req.params.proposalSlug)
     .then(function(parsedResponse) {
-      let metas = parsedResponse.total > 0
+      const metas = parsedResponse.total > 0
           ? {
             ...defaultMetas,
             description: parsedResponse.results[0].content,
@@ -62,13 +62,13 @@ router.get('/:country/consultation/:operationSlug/proposal/:proposalSlug', funct
 router.get('/:country/proposal/:proposalSlug', function(req, res, next) {
   const country = req.params.country;
 
-  proposalsController.proposalBySlug(req.param('proposalSlug'))
+  proposalsController.proposalBySlug(req.params.proposalSlug)
     .then(function(parsedProposalResponse) {
       return proposalsController.proposalMetas(parsedProposalResponse, req.query);
     })
-      .then(function(localMetas) {
-        res.send(loadContent(country, localMetas));
-      })
+    .then(function(localMetas) {
+      res.send(loadContent(country, localMetas));
+    })
     .catch(function (err) {
       console.log("falling back to default metas : " + err);
       res.send(loadContent(country, defaultMetas));
