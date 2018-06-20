@@ -4,6 +4,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const indexRouter = require('./routes/index');
+const querystring = require('querystring');
 
 const app = express();
 
@@ -16,7 +17,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use('/$', (req, res) => {
-  res.redirect('/FR');
+  res.redirect(`/FR?${querystring.stringify(req.query)}`);
 });
 
 app.use(express.static(path.join(__dirname, 'front')));
