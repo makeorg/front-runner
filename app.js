@@ -17,7 +17,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use('/$', (req, res) => {
-  res.redirect(`/FR?${querystring.stringify(req.query)}`);
+  const queryString = querystring.stringify(req.query);
+  const url = `FR${queryString.length === 0 ? '' : `?${queryString}`}`;
+  res.redirect(url);
 });
 
 app.use(express.static(path.join(__dirname, 'front')));
