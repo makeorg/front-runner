@@ -1,4 +1,4 @@
-# Make Front Proxy
+# Make Front Runner
 
 This application is a proxy of make-front app to be able to add dynamic data rendered from server like meta-tags.
 
@@ -32,6 +32,9 @@ docker build --rm -t nexus.prod.makeorg.tech/front-runner:master-latest .
 ```
 
 And visit http://localhost:9009/FR
+
+## Metrics
+The application expose a metric endpoint http://localhost:9009/metrics ready for prometheuse integration.
 
 ## Tests
 Todo

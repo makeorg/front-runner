@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const promBundle = require('express-prom-bundle');
 const indexRouter = require('./routes/index');
 const querystring = require('querystring');
 
@@ -15,6 +16,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(promBundle({ includeMethod: true }));
 
 app.use('/$', (req, res) => {
   const queryString = querystring.stringify(req.query);
