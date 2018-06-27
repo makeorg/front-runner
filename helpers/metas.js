@@ -1,5 +1,5 @@
 const defaultMetas = {
-  title: "Make.org, accélérateur d'intérêt collectif",
+  title: "Make.org, accélérateur d'intérêt général",
   description: 'Proposez, votez, agissons : ensemble, trouvons des solutions aux grandes problématiques actuelles. Les plus soutenues seront mises en action par Make.org et ses partenaires.',
   picture: 'https://uploads-ssl.webflow.com/598345cdee443e00013ae603/59a526e0a1a95c0001f8ca11_make.png',
 };
