@@ -6,6 +6,7 @@ const logger = require('morgan');
 const promBundle = require('express-prom-bundle');
 const indexRouter = require('./routes/index');
 const querystring = require('querystring');
+const fs = require('fs');
 
 const app = express();
 
@@ -17,6 +18,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(promBundle({ includeMethod: true }));
+
+app.use('/version', (req, res) => {
+  const data = fs.readFileSync(path.join(`${__dirname}/front/version`), 'utf8');
+  res.header('Content-Type', 'application/json');
+  res.json(JSON.parse(data));
+});
 
 app.use('/$', (req, res) => {
   const queryString = querystring.stringify(req.query);
