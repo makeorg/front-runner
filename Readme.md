@@ -38,3 +38,7 @@ The application expose a metric endpoint http://localhost:9009/metrics ready for
 
 ## Tests
 Todo
+
+## License
+
+This project is licenced under the AGPL license V3 or later. See [license](LICENSE.md)
