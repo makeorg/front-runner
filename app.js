@@ -27,8 +27,10 @@ const promBundle = require('express-prom-bundle');
 const indexRouter = require('./routes/index');
 const querystring = require('querystring');
 const fs = require('fs');
+const compression = require('compression');
 
 const app = express();
+app.use(compression());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
