@@ -18,7 +18,6 @@
  *
  */
 
-const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
@@ -56,9 +55,9 @@ app.use('/$', (req, res) => {
 app.use(express.static(path.join(__dirname, 'front')));
 app.use('/', indexRouter);
 
-// catch 404 and forward to error handler
-app.use((req, res, next) => {
-  next(createError(404));
+// catch 404 and forward to home page
+app.use((req, res) => {
+  res.redirect(`/#${req.originalUrl}`);
 });
 
 // error handler
