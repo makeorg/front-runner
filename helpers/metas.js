@@ -21,7 +21,7 @@
 const defaultMetas = {
   title: "Make.org, accélérateur d'intérêt général",
   description: 'Proposez, votez, agissons : ensemble, trouvons des solutions aux grandes problématiques actuelles. Les plus soutenues seront mises en action par Make.org et ses partenaires.',
-  picture: 'https://uploads-ssl.webflow.com/598345cdee443e00013ae603/59a526e0a1a95c0001f8ca11_make.png',
+  picture: 'https://uploads-ssl.webflow.com/59833d390a24e50001b873d8/5b86a9ba93851e6ea8e800b4_default%20meta%20card%20il%20faut.png',
 };
 
 const sequenceMetas = {
@@ -41,26 +41,38 @@ function proposal(contextName, authorName, proposalContent) {
   return {
     ...defaultMetas,
     title: 'Comme moi, soutenez cette proposition sur Make.org',
-    description: `Sur le sujet ${contextName}, ${authorName} propose «${proposalContent}».\nComme moi, soutenez la ou réagissez en votant sur Make.org !`,
+    description: `Sur le sujet ${contextName}, ${authorName} propose «${proposalContent}».\n` +
+                 'Comme moi, soutenez la ou réagissez en votant sur Make.org !',
   };
 }
 
 function getOperationImage(operationSlug) {
   switch (operationSlug) {
     case 'chance-aux-jeunes':
-      return 'https://uploads-ssl.webflow.com/59833d390a24e50001b873d8/5ac49addb50fc94d36e63221_share%20image%20une%20chance%20pour%20chaque%20jeune.jpg';
+      return 'https://uploads-ssl.webflow.com/59833d390a24e50001b873d8/5b83cb20b775a97cfb67f5a4_meta%20jeunes.jpg';
     case 'mieux-vivre-ensemble':
-      return 'https://uploads-ssl.webflow.com/598345cdee443e00013ae603/5aaa3e43106bcfc5bc0979cc_simulation%20visuel%20fb.jpg';
+      return 'https://uploads-ssl.webflow.com/59833d390a24e50001b873d8/5b83cb202b7a399c42b56d3d_meta%20mve.jpg';
     case 'culture':
-      return 'https://uploads-ssl.webflow.com/5ad76c5556a6411ac66ff8b3/5b23dad56f08f70e31e8a787_une.png';
+      return 'https://uploads-ssl.webflow.com/59833d390a24e50001b873d8/5b83cb2046483e731b5f21fe_meta%20culture.jpg';
     default:
       return defaultMetas.picture;
+  }
+}
+
+function getOperationDescription(operationSlug) {
+  switch (operationSlug) {
+    case 'culture':
+      return 'Vous avez un avis sur le sujet ? Alors comme des milliers de citoyens participez à la consultation ' +
+             'nationale Make.org : proposez vos idées, réagissez à celles des autres ! Les meilleures seront transformées en actions';
+    default:
+      return sequenceMetas.description;
   }
 }
 
 function sequence(operationName, operationSlug) {
   return {
     ...sequenceMetas,
+    description: getOperationDescription(operationSlug),
     title: operationName,
     picture: getOperationImage(operationSlug),
   };

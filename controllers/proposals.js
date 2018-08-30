@@ -41,16 +41,17 @@ exports.proposalMetas = function(parsedProposal, query) {
     const contextName = (function() {
       if (isOperation) {
         const translation = parsedContextResponse
-          .translations.find(translation => translation.language === proposal.language);
+          .translations
+          .find(responseTranslation => responseTranslation.language === proposal.language);
         if (translation) { return translation.title; }
         throw `Translation ${proposal.language} not found for operation ${parsedContextResponse.operationId}`;
       }
 
       const theme = parsedContextResponse.themes
-        .find(theme => theme.themeId === proposal.themeId);
+        .find(responseTheme => responseTheme.themeId === proposal.themeId);
       if (!theme) { throw `Theme ${proposal.themeId} not found.`; }
       const translation = theme
-        .translations.find(translation => translation.language === proposal.language);
+        .translations.find(themeTranslation => themeTranslation.language === proposal.language);
 
       if (translation) { return translation.title; }
       throw `Translation ${proposal.language} not found for theme ${theme.themeId}`;
