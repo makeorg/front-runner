@@ -35,9 +35,8 @@ exports.operationBySlug = function(slug) {
 };
 
 exports.operationMetas = function(parsedResponse, query) {
-  const language = query.language;
   const operationSlug = parsedResponse[0].slug;
   const operationName = parsedResponse[0].translations
-    .find(translation => translation.language === language).title;
+    .find(translation => translation.language === parsedResponse[0].defaultLanguage).title;
   return metas.sequence(operationName, operationSlug);
 };
