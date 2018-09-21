@@ -59,8 +59,7 @@ router.get('/:country/consultation/:operationSlug/selection', (req, res) => {
 
   operationsController.operationBySlug(req.params.operationSlug)
     .then((parsedResponse) => {
-      res.send(loadContent(country, operationsController
-        .operationMetas(parsedResponse, req.query)));
+      res.send(loadContent(country, operationsController.operationMetas(parsedResponse)));
     })
     .catch((err) => {
       console.error(err);
