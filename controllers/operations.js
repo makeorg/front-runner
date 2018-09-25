@@ -34,7 +34,7 @@ exports.operationBySlug = function(slug) {
     .then(response => JSON.parse(response));
 };
 
-exports.operationMetas = function(parsedResponse, query) {
+exports.operationMetas = function(parsedResponse) {
   const operationSlug = parsedResponse[0].slug;
   const operationName = parsedResponse[0].translations
     .find(translation => translation.language === parsedResponse[0].defaultLanguage).title;
