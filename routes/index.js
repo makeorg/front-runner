@@ -123,4 +123,13 @@ router.get('/:country/proposal/:proposalSlug', (req, res) => {
     });
 });
 
+// Proposal from no where
+router.get('/:operationSlug/:organisationSlug', (req, res) => {
+  const operationSlug = req.params.operationSlug;
+  const organisationSlug = req.params.organisationSlug;
+
+  const url = ['/consultation/', operationSlug, '/selection?utm_source=', organisationSlug, '&utm_campaign=', operationSlug, '&utm_medium=offline'];
+  res.redirect(url.join(''));
+});
+
 module.exports = router;
