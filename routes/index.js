@@ -128,7 +128,7 @@ router.get('/:operationSlug/:organisationSlug', (req, res) => {
   const operationSlug = req.params.operationSlug;
   const organisationSlug = req.params.organisationSlug;
 
-  const url = ['/consultation/', operationSlug, '/selection?utm_source=', organisationSlug, '&utm_campaign=', operationSlug, '&utm_medium=offline'];
+  const url = ['/?utm_source=', organisationSlug, '&utm_campaign=', operationSlug, '&utm_medium=offline', '#/consultation/', operationSlug, '/selection'];
   res.redirect(url.join(''));
 });
 
