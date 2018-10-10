@@ -28,8 +28,11 @@ const querystring = require('querystring');
 const fs = require('fs');
 const compression = require('compression');
 
+const proxy = require('./helpers/proxy.js');
+
 const app = express();
 app.use(compression());
+app.use('/api', proxy);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -39,6 +42,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(promBundle({ includeMethod: true }));
+
 
 app.use('/version', (req, res) => {
   const data = fs.readFileSync(path.join(`${__dirname}/front/version`), 'utf8');

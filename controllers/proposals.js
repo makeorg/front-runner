@@ -24,7 +24,7 @@ const metas = require('../helpers/metas.js');
 const operationsController = require('./operations.js');
 const configurationController = require('./configuration.js');
 
-const apiUrl = conf.apiUrl;
+const apiUrl = conf.proxyApiUrl;
 
 exports.proposalBySlug = function(slug) {
   return request(`${apiUrl}/proposals?slug=${slug}`)
