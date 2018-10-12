@@ -28,7 +28,7 @@ const operationsController = require('../controllers/operations.js');
 
 const router = express.Router();
 
-const apiUrl = conf.apiUrl;
+const apiUrl = conf.proxyApiUrl;
 
 const defaultMetas = metasHelper.default;
 

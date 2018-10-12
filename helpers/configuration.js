@@ -20,4 +20,6 @@
 
 module.exports = {
   apiUrl: process.env.API_URL || 'https://api.preprod.makeorg.tech',
+  frontUrl: process.env.FRONT_URL || 'https://www.preprod.makeorg.tech',
+  proxyApiUrl: [process.env.FRONT_URL || 'https://www.preprod.makeorg.tech', 'api'].join('/'),
 };

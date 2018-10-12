@@ -21,7 +21,7 @@
 const request = require('request-promise');
 const conf = require('../helpers/configuration.js');
 
-const apiUrl = conf.apiUrl;
+const apiUrl = conf.proxyApiUrl;
 
 exports.config = function() {
   return request(`${apiUrl}/configurations/front`)
