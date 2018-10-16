@@ -32,14 +32,14 @@ const apiUrl = conf.proxyApiUrl;
 
 const defaultMetas = metasHelper.default;
 
-function loadContent(country, metas) {
+function loadContent(request, metas) {
   // @todo: add cache system
   const data = fs.readFileSync(path.join(`${__dirname}/../front/index.html`), 'utf8');
 
   const content = data
     .replace(/API_URL/g, apiUrl)
-    .replace(/FORCED_COUNTRY/g, country)
-    .replace(/DETECTED_COUNTRY/g, country)
+    .replace(/FORCED_COUNTRY/g, request.headers['x-forced-country'] || 'FR')
+    .replace(/DETECTED_COUNTRY/g, request.headers['x-detected-country'] || 'FR')
     .replace(/META_TITLE/g, metas.title)
     .replace(/META_DESCRIPTION/g, metas.description)
     .replace(/META_PICTURE/g, metas.picture);
@@ -47,30 +47,29 @@ function loadContent(country, metas) {
   return content;
 }
 
-router.get('/:country', (req, res) => {
-  const country = req.params.country;
+// Main page
+router.get('/', (req, res) => {
+  res.send(loadContent(req, defaultMetas));
+});
 
-  res.send(loadContent(country, defaultMetas));
+router.get('', (req, res) => {
+  res.send(loadContent(req, defaultMetas));
 });
 
 // sequence from operation
 router.get('/:country/consultation/:operationSlug/selection', (req, res) => {
-  const country = req.params.country;
-
   operationsController.operationBySlug(req.params.operationSlug)
     .then((parsedResponse) => {
-      res.send(loadContent(country, operationsController.operationMetas(parsedResponse)));
+      res.send(loadContent(req, operationsController.operationMetas(parsedResponse)));
     })
     .catch((err) => {
       console.error(err);
-      res.send(loadContent(country, defaultMetas));
+      res.send(loadContent(req, defaultMetas));
     });
 });
 
 // Proposal from theme
 router.get('/:country/theme/:themeSlug/proposal/:proposalSlug', (req, res) => {
-  const country = req.params.country;
-
   proposalsController.proposalBySlug(req.params.proposalSlug)
     .then((parsedResponse) => {
       const metas = parsedResponse.total > 0
@@ -79,18 +78,16 @@ router.get('/:country/theme/:themeSlug/proposal/:proposalSlug', (req, res) => {
           description: parsedResponse.results[0].content,
         } : defaultMetas;
 
-      res.send(loadContent(country, metas));
+      res.send(loadContent(req, metas));
     })
     .catch((err) => {
       console.error(err);
-      res.send(loadContent(country, defaultMetas));
+      res.send(loadContent(req, defaultMetas));
     });
 });
 
 // Proposal from operation
 router.get('/:country/consultation/:operationSlug/proposal/:proposalSlug', (req, res) => {
-  const country = req.params.country;
-
   proposalsController.proposalBySlug(req.params.proposalSlug)
     .then((parsedResponse) => {
       const metas = parsedResponse.total > 0
@@ -99,27 +96,25 @@ router.get('/:country/consultation/:operationSlug/proposal/:proposalSlug', (req,
           description: parsedResponse.results[0].content,
         } : defaultMetas;
 
-      res.send(loadContent(country, metas));
+      res.send(loadContent(req, metas));
     })
     .catch((err) => {
       console.error(err);
-      res.send(loadContent(country, defaultMetas));
+      res.send(loadContent(req, defaultMetas));
     });
 });
 
 // Proposal from no where
 router.get('/:country/proposal/:proposalSlug', (req, res) => {
-  const country = req.params.country;
-
   proposalsController.proposalBySlug(req.params.proposalSlug)
     .then(parsedProposalResponse =>
       proposalsController.proposalMetas(parsedProposalResponse, req.query))
     .then((localMetas) => {
-      res.send(loadContent(country, localMetas));
+      res.send(loadContent(req, localMetas));
     })
     .catch((err) => {
       console.error(`falling back to default metas : ${err}`);
-      res.send(loadContent(country, defaultMetas));
+      res.send(loadContent(req, defaultMetas));
     });
 });
 
