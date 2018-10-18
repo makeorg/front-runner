@@ -6,6 +6,8 @@ module.exports = {
   apps : [{
     name      : 'front-runner',
     script    : 'bin/www',
+    exec_mode : "cluster",
+    instances : 8,
     env: {
       NODE_ENV: 'development'
     },
