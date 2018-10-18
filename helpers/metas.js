@@ -58,6 +58,8 @@ function getOperationImage(operationSlug) {
       return 'https://uploads-ssl.webflow.com/59833d390a24e50001b873d8/5ba39fc6fafb147685dd9b4c_meta%20aines.jpg';
     case 'plan-climat':
       return 'https://uploads-ssl.webflow.com/59833d390a24e50001b873d8/5bc700fec88c3a984341ad23_meta%20plan%20climat.jpg';
+    case 'european-digital-champions':
+      return 'https://uploads-ssl.webflow.com/59833d390a24e50001b873d8/5bc88fc5e1f404acc8042ac1_meta%20g9%2B.jpg';
     default:
       return defaultMetas.picture;
   }
@@ -75,6 +77,8 @@ function getOperationDescription(operationSlug) {
     case 'plan-climat':
       return 'Vous avez une idée sur le sujet ? Alors comme des milliers de citoyens participez à la consultation Plan Climat de Make.org ' +
       'en partenariat avec Nice Matin et la Métropole Nice Côte d\'Azur';
+    case 'european-digital-champions':
+      return 'Vous avez une idée sur le sujet ? Participez à la consultation initiée par le G9+ & Roland Berger avec Make.org';
     default:
       return sequenceMetas.description;
   }
