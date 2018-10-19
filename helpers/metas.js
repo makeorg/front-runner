@@ -56,6 +56,8 @@ function getOperationImage(operationSlug) {
       return 'https://uploads-ssl.webflow.com/59833d390a24e50001b873d8/5b83cb2046483e731b5f21fe_meta%20culture.jpg';
     case 'aines':
       return 'https://uploads-ssl.webflow.com/59833d390a24e50001b873d8/5ba39fc6fafb147685dd9b4c_meta%20aines.jpg';
+    case 'plan-climat':
+      return 'https://uploads-ssl.webflow.com/59833d390a24e50001b873d8/5bc700fec88c3a984341ad23_meta%20plan%20climat.jpg';
     default:
       return defaultMetas.picture;
   }
@@ -70,6 +72,9 @@ function getOperationDescription(operationSlug) {
       return 'Make.org lance avec le ministère des Solidarités et de la Santé une vaste consultation citoyenne en ligne autour de la question :' +
       '\'Comment mieux prendre soin de nos aînés ?\'. Les milliers de propositions citoyennes recueillies vont nous permettre de bâtir le 1er ' +
       'grand Plan d\'actions citoyen en faveur des Aînés.';
+    case 'plan-climat':
+      return 'Vous avez une idée sur le sujet ? Alors comme des milliers de citoyens participez à la consultation Plan Climat de Make.org ' +
+      'en partenariat avec Nice Matin et la Métropole Nice Côte d\'Azur';
     default:
       return sequenceMetas.description;
   }
