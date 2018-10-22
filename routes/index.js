@@ -126,7 +126,7 @@ router.get('/:operationSlug/:organisationSlug', (req, res) => {
 // operation shortcut
 router.get('/:operationSlug', (req, res) => {
   const operationSlug = req.params.operationSlug;
-  const url = ["/", '#/consultation/', operationSlug];
+  const url = ['/', '#/consultation/', operationSlug];
   res.redirect(url.join(''));
 });
 

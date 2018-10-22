@@ -31,6 +31,7 @@ const proxy = require('./helpers/proxy.js');
 
 const app = express();
 app.use(compression());
+app.use('/api', proxy);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -47,18 +48,14 @@ app.use('/version', (req, res) => {
   res.json(JSON.parse(data));
 });
 
-app.use('/api', proxy);
-
 app.use(express.static(path.join(__dirname, 'front'), { index: false }));
 app.use('/', indexRouter);
 
-
-
-// catch 404 and forward to home page	
+// catch 404 and forward to home page
 app.use((req, res) => {
   res.redirect(`/#${req.originalUrl}`);
 });
-    
+
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
   next(createError(404));
