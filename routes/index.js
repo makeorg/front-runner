@@ -52,10 +52,6 @@ router.get('/', (req, res) => {
   res.send(loadContent(req, defaultMetas));
 });
 
-router.get('', (req, res) => {
-  res.send(loadContent(req, defaultMetas));
-});
-
 // sequence from operation
 router.get('/:country/consultation/:operationSlug/selection', (req, res) => {
   operationsController.operationBySlug(req.params.operationSlug)
@@ -124,6 +120,13 @@ router.get('/:operationSlug/:organisationSlug', (req, res) => {
   const organisationSlug = req.params.organisationSlug;
 
   const url = ['/?utm_source=', organisationSlug, '&utm_campaign=', operationSlug, '&utm_medium=offline', '#/consultation/', operationSlug, '/selection'];
+  res.redirect(url.join(''));
+});
+
+// operation shortcut
+router.get('/:operationSlug', (req, res) => {
+  const operationSlug = req.params.operationSlug;
+  const url = ["/", '#/consultation/', operationSlug];
   res.redirect(url.join(''));
 });
 

@@ -49,10 +49,16 @@ app.use('/version', (req, res) => {
 
 app.use('/api', proxy);
 
-app.use(express.static(path.join(__dirname, 'front'), {index: false}));
+app.use(express.static(path.join(__dirname, 'front'), { index: false }));
 app.use('/', indexRouter);
 
 
+
+// catch 404 and forward to home page	
+app.use((req, res) => {
+  res.redirect(`/#${req.originalUrl}`);
+});
+    
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
   next(createError(404));

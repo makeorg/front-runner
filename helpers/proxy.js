@@ -18,6 +18,7 @@ const options = {
   },
   secure: false,
   changeOrigin: true,
+  xfwd: true,
   onProxyRes: relayResponseHeaders,
 };
 
