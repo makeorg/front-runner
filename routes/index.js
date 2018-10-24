@@ -52,6 +52,10 @@ router.get('/', (req, res) => {
   res.send(loadContent(req, defaultMetas));
 });
 
+router.get('/FR', (req, res) => {
+  res.send(loadContent(req, defaultMetas));
+});
+
 // sequence from operation
 router.get('/:country/consultation/:operationSlug/selection', (req, res) => {
   operationsController.operationBySlug(req.params.operationSlug)
