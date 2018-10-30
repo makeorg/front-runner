@@ -60,6 +60,8 @@ function getOperationImage(operationSlug) {
       return 'https://uploads-ssl.webflow.com/59833d390a24e50001b873d8/5bc700fec88c3a984341ad23_meta%20plan%20climat.jpg';
     case 'european-digital-champions':
       return 'https://uploads-ssl.webflow.com/59833d390a24e50001b873d8/5bc88fc5e1f404acc8042ac1_meta%20g9%2B.jpg';
+    case 'jeunesse-hautsdefrance':
+      return 'https://uploads-ssl.webflow.com/59833d390a24e50001b873d8/5bd073e6ae57fd558cc90165_meta%20hdf.jpg';
     default:
       return defaultMetas.picture;
   }
@@ -79,6 +81,8 @@ function getOperationDescription(operationSlug) {
       'en partenariat avec Nice Matin et la Métropole Nice Côte d\'Azur';
     case 'european-digital-champions':
       return 'Vous avez une idée sur le sujet ? Participez à la consultation initiée par le G9+ & Roland Berger avec Make.org';
+    case 'jeunesse-hautsdefrance':
+      return 'Vous avez une idée sur le sujet ? Participez à la consultation initiée par la Région Hauts-de-France avec Make.org';
     default:
       return sequenceMetas.description;
   }
