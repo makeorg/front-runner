@@ -46,58 +46,62 @@ function proposal(contextName, authorName, proposalContent) {
   };
 }
 
-function getOperationImage(operationSlug) {
-  switch (operationSlug) {
-    case 'chance-aux-jeunes':
+function getOperationImage(operationSlug, country) {
+  switch ((operationSlug, country)) {
+    case ('chance-aux-jeunes', 'FR'):
       return 'https://uploads-ssl.webflow.com/59833d390a24e50001b873d8/5b83cb20b775a97cfb67f5a4_meta%20jeunes.jpg';
-    case 'mieux-vivre-ensemble':
+    case ('mieux-vivre-ensemble', 'FR'):
       return 'https://uploads-ssl.webflow.com/59833d390a24e50001b873d8/5b83cb202b7a399c42b56d3d_meta%20mve.jpg';
-    case 'culture':
+    case ('culture', 'FR'):
       return 'https://uploads-ssl.webflow.com/59833d390a24e50001b873d8/5b83cb2046483e731b5f21fe_meta%20culture.jpg';
-    case 'aines':
+    case ('aines', 'FR'):
       return 'https://uploads-ssl.webflow.com/59833d390a24e50001b873d8/5ba39fc6fafb147685dd9b4c_meta%20aines.jpg';
-    case 'plan-climat':
+    case ('plan-climat', 'FR'):
       return 'https://uploads-ssl.webflow.com/59833d390a24e50001b873d8/5bc700fec88c3a984341ad23_meta%20plan%20climat.jpg';
-    case 'european-digital-champions':
+    case ('european-digital-champions', 'FR'):
       return 'https://uploads-ssl.webflow.com/59833d390a24e50001b873d8/5bc88fc5e1f404acc8042ac1_meta%20g9%2B.jpg';
-    case 'jeunesse-hautsdefrance':
+    case ('european-digital-champions', 'DE'):
+      return 'https://uploads-ssl.webflow.com/59833d390a24e50001b873d8/5bd6e1a25d02ac436404deca_meta%20g9%2B%20de.jpg';
+    case ('jeunesse-hautsdefrance', 'FR'):
       return 'https://uploads-ssl.webflow.com/59833d390a24e50001b873d8/5bd073e6ae57fd558cc90165_meta%20hdf.jpg';
-    case 'villededemain':
+    case ('villededemain', 'FR'):
       return 'https://uploads-ssl.webflow.com/59833d390a24e50001b873d8/5bd18472f5c68034b6b5fcf3_meta%20mipim.jpg';
     default:
       return defaultMetas.picture;
   }
 }
 
-function getOperationDescription(operationSlug) {
-  switch (operationSlug) {
-    case 'culture':
+function getOperationDescription(operationSlug, country) {
+  switch ((operationSlug, country)) {
+    case ('culture', 'FR'):
       return 'Vous avez un avis sur le sujet ? Alors comme des milliers de citoyens participez à la consultation ' +
              'nationale Make.org : proposez vos idées, réagissez à celles des autres ! Les meilleures seront transformées en actions';
-    case 'aines':
+    case ('aines', 'FR'):
       return 'Make.org lance avec le ministère des Solidarités et de la Santé une vaste consultation citoyenne en ligne autour de la question :' +
       '\'Comment mieux prendre soin de nos aînés ?\'. Les milliers de propositions citoyennes recueillies vont nous permettre de bâtir le 1er ' +
       'grand Plan d\'actions citoyen en faveur des Aînés.';
-    case 'plan-climat':
+    case ('plan-climat', 'FR'):
       return 'Vous avez une idée sur le sujet ? Alors comme des milliers de citoyens participez à la consultation Plan Climat de Make.org ' +
       'en partenariat avec Nice Matin et la Métropole Nice Côte d\'Azur';
-    case 'european-digital-champions':
+    case ('european-digital-champions', 'FR'):
       return 'Vous avez une idée sur le sujet ? Participez à la consultation initiée par le G9+ & Roland Berger avec Make.org';
-    case 'jeunesse-hautsdefrance':
+    case ('european-digital-champions', 'DE'):
+      return 'Sie haben irgendwelche Ideen zu diesem Thema? Nehmen Sie an der von den G9+ & Roland Berger initiierten Konsultation mit Make.org teil.';
+    case ('jeunesse-hautsdefrance', 'FR'):
       return 'Vous avez une idée sur le sujet ? Participez à la consultation initiée par la Région Hauts-de-France avec Make.org';
-    case 'villededemain':
+    case ('villededemain', 'FR'):
       return 'Vous avez une idée sur le sujet ? Participez à la consultation organisée à l\'occasion du MIPIM 2019';
     default:
       return sequenceMetas.description;
   }
 }
 
-function sequence(operationName, operationSlug) {
+function sequence(operationName, operationSlug, country) {
   return {
     ...sequenceMetas,
-    description: getOperationDescription(operationSlug),
+    description: getOperationDescription(operationSlug, country),
     title: operationName,
-    picture: getOperationImage(operationSlug),
+    picture: getOperationImage(operationSlug, country),
   };
 }
 
