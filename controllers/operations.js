@@ -34,9 +34,9 @@ exports.operationBySlug = function(slug) {
     .then(response => JSON.parse(response));
 };
 
-exports.operationMetas = function(parsedResponse) {
+exports.operationMetas = function(parsedResponse, country) {
   const operationSlug = parsedResponse[0].slug;
   const operationName = parsedResponse[0].translations
-    .find(translation => translation.language === parsedResponse[0].defaultLanguage).title;
-  return metas.sequence(operationName, operationSlug);
+    .find(translation => translation.language === conf.countryLanguage[country]).title;
+  return metas.sequence(operationName, operationSlug, country);
 };

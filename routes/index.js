@@ -58,9 +58,10 @@ router.get('/FR', (req, res) => {
 
 // sequence from operation
 router.get('/:country/consultation/:operationSlug/selection', (req, res) => {
+  const country = req.params.country;
   operationsController.operationBySlug(req.params.operationSlug)
     .then((parsedResponse) => {
-      res.send(loadContent(req, operationsController.operationMetas(parsedResponse)));
+      res.send(loadContent(req, operationsController.operationMetas(parsedResponse, country)));
     })
     .catch((err) => {
       console.error(err);
