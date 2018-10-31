@@ -62,6 +62,8 @@ function getOperationImage(operationSlug) {
       return 'https://uploads-ssl.webflow.com/59833d390a24e50001b873d8/5bc88fc5e1f404acc8042ac1_meta%20g9%2B.jpg';
     case 'jeunesse-hautsdefrance':
       return 'https://uploads-ssl.webflow.com/59833d390a24e50001b873d8/5bd073e6ae57fd558cc90165_meta%20hdf.jpg';
+    case 'villededemain':
+      return 'https://uploads-ssl.webflow.com/59833d390a24e50001b873d8/5bd18472f5c68034b6b5fcf3_meta%20mipim.jpg';
     default:
       return defaultMetas.picture;
   }
@@ -83,6 +85,8 @@ function getOperationDescription(operationSlug) {
       return 'Vous avez une idée sur le sujet ? Participez à la consultation initiée par le G9+ & Roland Berger avec Make.org';
     case 'jeunesse-hautsdefrance':
       return 'Vous avez une idée sur le sujet ? Participez à la consultation initiée par la Région Hauts-de-France avec Make.org';
+    case 'villededemain':
+      return 'Vous avez une idée sur le sujet ? Participez à la consultation organisée à l\'occasion du MIPIM 2019';
     default:
       return sequenceMetas.description;
   }
