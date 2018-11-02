@@ -31,8 +31,13 @@ exports.proposalBySlug = function(slug) {
     .then(response => JSON.parse(response));
 };
 
+exports.proposalById = function(proposalId) {
+  return request(`${apiUrl}/proposals/${proposalId}`)
+    .then(response => JSON.parse(response));
+};
+
 exports.proposalMetas = function(parsedProposal, query) {
-  const proposal = parsedProposal.results[0];
+  const proposal = parsedProposal;
   const isOperation = proposal.operationId !== undefined && proposal.operationId !== '';
   const fetchContext = (isOperation) ?
     operationsController.operationById(proposal.operationId) : configurationController.config();
