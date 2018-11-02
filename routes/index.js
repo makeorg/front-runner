@@ -70,6 +70,22 @@ router.get('/:country/consultation/:operationSlug/selection', (req, res) => {
 });
 
 // Proposal from theme
+router.get('/:country/theme/:themeSlug/proposal/:proposalId/:proposalSlug', (req, res) => {
+  proposalsController.proposalById(req.params.proposalId)
+    .then((parsedResponse) => {
+      const metas = {
+        ...defaultMetas,
+        description: parsedResponse.content,
+      };
+
+      res.send(loadContent(req, metas));
+    })
+    .catch((err) => {
+      console.error(err);
+      res.send(loadContent(req, defaultMetas));
+    });
+});
+
 router.get('/:country/theme/:themeSlug/proposal/:proposalSlug', (req, res) => {
   proposalsController.proposalBySlug(req.params.proposalSlug)
     .then((parsedResponse) => {
@@ -88,6 +104,22 @@ router.get('/:country/theme/:themeSlug/proposal/:proposalSlug', (req, res) => {
 });
 
 // Proposal from operation
+router.get('/:country/consultation/:operationSlug/proposal/:proposalId/:proposalSlug', (req, res) => {
+  proposalsController.proposalById(req.params.proposalId)
+    .then((parsedResponse) => {
+      const metas = {
+        ...defaultMetas,
+        description: parsedResponse.content,
+      };
+
+      res.send(loadContent(req, metas));
+    })
+    .catch((err) => {
+      console.error(err);
+      res.send(loadContent(req, defaultMetas));
+    });
+});
+
 router.get('/:country/consultation/:operationSlug/proposal/:proposalSlug', (req, res) => {
   proposalsController.proposalBySlug(req.params.proposalSlug)
     .then((parsedResponse) => {
@@ -106,10 +138,23 @@ router.get('/:country/consultation/:operationSlug/proposal/:proposalSlug', (req,
 });
 
 // Proposal from no where
+router.get('/:country/proposal/:proposalId/:proposalSlug', (req, res) => {
+  proposalsController.proposalById(req.params.proposalId)
+    .then(parsedProposalResponse =>
+      proposalsController.proposalMetas(parsedProposalResponse, req.query))
+    .then((localMetas) => {
+      res.send(loadContent(req, localMetas));
+    })
+    .catch((err) => {
+      console.error(`falling back to default metas : ${err}`);
+      res.send(loadContent(req, defaultMetas));
+    });
+});
+
 router.get('/:country/proposal/:proposalSlug', (req, res) => {
   proposalsController.proposalBySlug(req.params.proposalSlug)
     .then(parsedProposalResponse =>
-      proposalsController.proposalMetas(parsedProposalResponse, req.query))
+      proposalsController.proposalMetas(parsedProposalResponse.resluts[0], req.query))
     .then((localMetas) => {
       res.send(loadContent(req, localMetas));
     })
