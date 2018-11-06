@@ -61,13 +61,14 @@ exports.proposalMetas = function(parsedProposal, query) {
       if (translation) { return translation.title; }
       throw `Translation ${proposal.language} not found for theme ${theme.themeId}`;
     }());
+    const operationSlug = (isOperation) ? parsedContextResponse.slug : undefined;
+    const authorName = proposal.author.firstName || proposal.author.organizationName;
     return (function() {
       switch (query.shared_proposal) {
         case 'my-proposal':
-          return metas.myProposal(contextName, proposal.content);
+          return metas.myProposal(contextName, proposal.content, operationSlug);
         case 'voted-proposal':
-          return metas.proposal(contextName, proposal.author.firstName ||
-            proposal.author.organizationName, proposal.content);
+          return metas.proposal(contextName, authorName, proposal.content, operationSlug);
         default:
           return metas.default;
       }
