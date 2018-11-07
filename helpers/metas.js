@@ -29,24 +29,16 @@ const sequenceMetas = {
   description: 'Vous avez un avis sur le sujet ? Alors comme des milliers de citoyens participez à la consultation nationale Make.org : proposez vos idées, réagissez à celles des autres ! Les meilleures seront transformées en actions.',
 };
 
-function myProposal(contextName, proposalContent) {
-  return {
-    ...defaultMetas,
-    title: 'Soutenez ma proposition sur Make.org',
-    description: `Sur le sujet ${contextName} je propose «${proposalContent}».`,
-  };
+function getOperationImageForProposal(operationSlug) {
+  switch (operationSlug) {
+    case ('jeunesse-hautsdefrance'):
+      return 'https://uploads-ssl.webflow.com/59833d390a24e50001b873d8/5bd073e6ae57fd558cc90165_meta%20hdf.jpg';
+    default:
+      return defaultMetas.picture;
+  }
 }
 
-function proposal(contextName, authorName, proposalContent) {
-  return {
-    ...defaultMetas,
-    title: 'Comme moi, soutenez cette proposition sur Make.org',
-    description: `Sur le sujet ${contextName}, ${authorName} propose «${proposalContent}».\n` +
-                 'Comme moi, soutenez la ou réagissez en votant sur Make.org !',
-  };
-}
-
-function getOperationImage(operationSlug, country) {
+function getOperationImageForSequence(operationSlug, country) {
   const concatenated = [country, operationSlug].join('-');
   switch (concatenated) {
     case ('FR-chance-aux-jeunes'):
@@ -72,7 +64,7 @@ function getOperationImage(operationSlug, country) {
   }
 }
 
-function getOperationDescription(operationSlug, country) {
+function getOperationDescriptionForSequence(operationSlug, country) {
   const concatenated = [country, operationSlug].join('-');
   switch (concatenated) {
     case ('FR-culture'):
@@ -98,12 +90,31 @@ function getOperationDescription(operationSlug, country) {
   }
 }
 
+function myProposal(contextName, proposalContent, operationSlug) {
+  return {
+    ...defaultMetas,
+    title: 'Soutenez ma proposition sur Make.org',
+    description: `Sur le sujet ${contextName} je propose «${proposalContent}».`,
+    picture: getOperationImageForProposal(operationSlug),
+  };
+}
+
+function proposal(contextName, authorName, proposalContent, operationSlug) {
+  return {
+    ...defaultMetas,
+    title: 'Comme moi, soutenez cette proposition sur Make.org',
+    description: `Sur le sujet ${contextName}, ${authorName} propose «${proposalContent}».\n` +
+                 'Comme moi, soutenez la ou réagissez en votant sur Make.org !',
+    picture: getOperationImageForProposal(operationSlug),
+  };
+}
+
 function sequence(operationName, operationSlug, country) {
   return {
     ...sequenceMetas,
-    description: getOperationDescription(operationSlug, country),
+    description: getOperationDescriptionForSequence(operationSlug, country),
     title: operationName,
-    picture: getOperationImage(operationSlug, country),
+    picture: getOperationImageForSequence(operationSlug, country),
   };
 }
 
