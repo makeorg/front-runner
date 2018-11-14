@@ -22,7 +22,7 @@ const request = require('request-promise');
 const conf = require('../helpers/configuration.js');
 const metas = require('../helpers/metas.js');
 
-const apiUrl = conf.proxyApiUrl;
+const apiUrl = conf.apiUrl;
 
 exports.operationById = function(operationId) {
   return request(`${apiUrl}/operations/${operationId}`)

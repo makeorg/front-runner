@@ -21,14 +21,14 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
-const conf = require('../helpers/configuration.js');
+const configuration = require('../helpers/configuration.js');
 const metasHelper = require('../helpers/metas.js');
 const proposalsController = require('../controllers/proposals.js');
 const operationsController = require('../controllers/operations.js');
 
 const router = express.Router();
 
-const apiUrl = conf.proxyApiUrl;
+const apiUrl = configuration.apiUrl;
 
 const defaultMetas = metasHelper.default;
 
