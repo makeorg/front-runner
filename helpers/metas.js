@@ -59,7 +59,7 @@ function getOperationImageForSequence(operationSlug, country) {
       return 'https://uploads-ssl.webflow.com/59833d390a24e50001b873d8/5bd073e6ae57fd558cc90165_meta%20hdf.jpg';
     case ('FR-villededemain'):
       return 'https://uploads-ssl.webflow.com/59833d390a24e50001b873d8/5bd18472f5c68034b6b5fcf3_meta%20mipim.jpg';
-    case ('GB-villededemain'):
+    case ('GB-cityoftomorrow'):
       return 'https://uploads-ssl.webflow.com/59833d390a24e50001b873d8/5bf686c60627e72ebbf942fe_meta%20mipim%20uk.jpg';
     default:
       return defaultMetas.picture;
@@ -87,7 +87,7 @@ function getOperationDescriptionForSequence(operationSlug, country) {
       return 'Vous avez une idée sur le sujet ? Participez à la consultation initiée par la Région Hauts-de-France avec Make.org';
     case ('FR-villededemain'):
       return 'Vous avez une idée sur le sujet ? Participez à la consultation organisée à l\'occasion du MIPIM 2019';
-    case ('GB-villededemain'):
+    case ('GB-cityoftomorrow'):
       return 'Any thought on that topic ? Join the consultation started by MIPIM along with Make.org';
     default:
       return sequenceMetas.description;
