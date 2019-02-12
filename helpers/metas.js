@@ -59,6 +59,8 @@ function getOperationImageForSequence(operationSlug, country) {
       return 'https://uploads-ssl.webflow.com/59833d390a24e50001b873d8/5bd073e6ae57fd558cc90165_meta%20hdf.jpg';
     case ('FR-villededemain'):
       return 'https://uploads-ssl.webflow.com/59833d390a24e50001b873d8/5bd18472f5c68034b6b5fcf3_meta%20mipim.jpg';
+    case ('FR-ditp'):
+      return 'https://uploads-ssl.webflow.com/59833d390a24e50001b873d8/5c5c4cb81a4d8b510d230c80_meta%20ditp.jpg';
     case ('GB-cityoftomorrow'):
       return 'https://uploads-ssl.webflow.com/59833d390a24e50001b873d8/5bf686c60627e72ebbf942fe_meta%20mipim%20uk.jpg';
     default:
@@ -87,6 +89,8 @@ function getOperationDescriptionForSequence(operationSlug, country) {
       return 'Vous avez une idée sur le sujet ? Participez à la consultation initiée par la Région Hauts-de-France avec Make.org';
     case ('FR-villededemain'):
       return 'Vous avez une idée sur le sujet ? Participez à la consultation organisée à l\'occasion du MIPIM 2019';
+    case ('FR-ditp'):
+      return 'Vous avez une idée sur le sujet ? Prenez position sur ces solutions ou proposez les vôtres. Vos contributions seront restituées à la Direction Interministérielle de la Transformation Publique de manière anonyme.';
     case ('GB-cityoftomorrow'):
       return 'Any thought on that topic ? Join the consultation started by MIPIM along with Make.org';
     default:
